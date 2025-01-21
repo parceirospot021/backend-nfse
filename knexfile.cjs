@@ -41,18 +41,21 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'spot_nfse',
-      user: 'username',
-      password: 'password',
+      connectionString: process.env.DB_URL,
+      ssl: true
     },
     pool: {
       min: 2,
       max: 10
     },
+    searchPath: ['knex', 'public'],
     migrations: {
-      tableName: 'knex_migrations'
+      directory: './src/database/migrations',
+    },
+    seeds: {
+      directory: './src/database/seeds'
     }
   }
 };
