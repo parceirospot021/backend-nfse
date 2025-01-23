@@ -166,20 +166,16 @@ readStream.on('end', async function() {
   let maxItemsPerInsert = 100;
   let qtdLoop = Math.ceil(arr.length / maxItemsPerInsert);
   
-  // for(let i = 1; i <= qtdLoop; i++){
-  //   console.log(new Date());
-  //   await insertBd(arr.slice((i-1) * maxItemsPerInsert, i*maxItemsPerInsert));
-  // }
+  for(let i = 1; i <= qtdLoop; i++){
+    console.log(new Date());
+    await insertBd(arr.slice((i-1) * maxItemsPerInsert, i*maxItemsPerInsert));
+  }
   
 });
 
 const insertBd = async (arr) => {
     console.log('CHAMEI');
     return await new Promise((resolve) => {
-        // setTimeout(() => {
-        //     console.log('DEPOIS DE 5');
-        //     resolve();
-        // }, 5000);
         postgresConnection('all_nfse').insert(arr).then(() => {
             setTimeout(() => {
                 resolve();

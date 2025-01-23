@@ -122,7 +122,6 @@ const getNfseAutomatic = async() => {
         console.log('INICIANDO CRON', {initDate, endDate, initDateRef});
         const makeRequest = async (page) => {
             if(page >= max_request) return;
-            if(!token) return;
             axios
             .get(`https://spaceapiv2hml.e-datacenter.nddigital.com.br/integracaov2-nfse/api/NFSeRecepcao/ConsultarRecepcaoNFSe?CNPJ=29985115000164&DataEmissaoInicial=${initDate}&DataEmissaoFinal=${endDate}&Pagina=${page}`,
             ).then(async({data}) => {
@@ -230,9 +229,6 @@ const getNfseAutomatic = async() => {
                     getToken().then(() => {
                         makeRequest(page);
                     })
-                }else{
-                    console.log('else');
-                    // makeRequest(page);
                 }
             })
         }

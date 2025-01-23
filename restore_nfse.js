@@ -31,8 +31,8 @@ let config = {
     //     DataEmissaoFinal: '2025-01-18T23:59:59.999Z'
     // },
     {
-        DataEmissaoInicial: '2025-01-18T23:59:59.999Z',
-        DataEmissaoFinal: '2025-01-19T23:59:59.999Z'
+        DataEmissaoInicial: '2025-01-19T23:59:59.999Z',
+        DataEmissaoFinal: '2025-01-20T23:59:59.999Z'
     },
     // {
     //     DataEmissaoInicial: '2024-12-01T23:59:59.000Z',

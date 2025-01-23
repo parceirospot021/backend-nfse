@@ -35,7 +35,7 @@ const NfseService = {
         cnpj_prestador,
         cnpj_tomador,
         tomador, 
-        prestador
+        prestador,
     ){
         try{
 
@@ -108,11 +108,11 @@ const NfseService = {
                 query.andWhereRaw(`UPPER("tomador") like ?`, `%${String(tomador).toUpperCase()}%`);
                 countQuery.andWhereRaw(`UPPER("tomador") like ?`, `%${String(tomador).toUpperCase()}%`);
             }
-            
 
-            if (limit && page) {
-                query.limit(limit).offset((page - 1) * limit);
-            }
+
+            // if (limit && page) {
+            //     query.limit(limit).offset((page - 1) * limit);
+            // }
     
             const nfse = await query;
             const [count] = await countQuery.count();
@@ -166,7 +166,62 @@ const NfseService = {
         }catch(err){
             console.log(err);
         }
-    }
+    },
+
+    async exportExcelPerAccessKey(chave_acesso){
+        try{
+            const dirPath = './src/downloads/'
+            const workbook = xlsx.utils.book_new()
+
+            const query = postgresConnection('all_nfse').select('*')
+
+            //SOMENTE PARA DOWNLOAD INDIVIDUAL...
+            if(chave_acesso){
+                query.where('chave_acesso', '=', chave_acesso)
+            }
+
+            const nfse = await query;
+            const nfseFormmated = nfse.map(item => {
+                return {
+                    'Município': item.municipio,
+                    'RPS': item.num_rps,
+                    'Série': item.serie,
+                    'NFSE': item.num_nfse,
+                    'Cnpj Prestador': item.cnpj_prestador,
+                    'Cnpj Tomador': item.cnpj_tomador,
+                    'Prestador': item.prestador,
+                    'Tomador': item.tomador,
+                    'Valor ISS': item.valor_iss,
+                    'Valor Serviços': item.valor_servicos,
+                    'Base Cálculo': item.base_calculo,
+                    'Aliquota': item.aliquota,
+                    'Valor líquido NFSE': item.valor_liquido_nfse,
+                    'Tributos federais': item.valor_total_tributos_federais,
+                    'Tributos estaduais': item.valor_total_tributos_estaduais,
+                    'Tributos municipais': item.valor_total_tributos_municipais,
+                    'Chave acesso': item.chave_acesso,
+                    'Descrição': item.descricao,
+                    'Endereco Prestador': item.end_prestador,
+                    'Status': item.status,
+                    'Data emissão': item.ref_dataEmissao
+                }
+            })
+                        
+            let worksheet = xlsx.utils.json_to_sheet(nfseFormmated);
+            xlsx.utils.book_append_sheet(workbook, worksheet, "NFSE");
+
+            const nameExcel = `${chave_acesso}-random=${Date.now()}`
+
+            xlsx.writeFile(workbook, `${dirPath}${nameExcel}.xlsx`);
+
+            return {nameExcel, dirPath};
+            
+        }catch(err){
+            console.log(err);
+        }
+    },
+
+    
 
 }
 
