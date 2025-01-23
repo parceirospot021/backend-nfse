@@ -138,6 +138,9 @@ const NfseService = {
             const nfsesFormmated = nfses.map((item, i) => {
                 if(i == 0){
                     console.log(item.ref_dataEmissao);
+                    console.log(moment(item.ref_dataEmissao).subtract('hour', 3).format('DD/MM/YYYY[ ]HH:mm:ss'));
+                    console.log(moment(item.ref_dataEmissao).utc(true).format('DD/MM/YYYY[ ]HH:mm:ss'))
+                    console.log(moment(item.ref_dataEmissao).utc(false).format('DD/MM/YYYY[ ]HH:mm:ss'))
                     console.log('chave> ', item.chave_acesso)
                 }
                 return {
@@ -161,7 +164,7 @@ const NfseService = {
                     'Descrição': item.descricao,
                     'Endereco Prestador': item.end_prestador,
                     'Status': item.status,
-                    'Data emissão': moment(item.ref_dataEmissao).utc(true).format('DD/MM/YYYY[ ]HH:mm:ss') 
+                    'Data emissão': moment(item.ref_dataEmissao).subtract('hour', 3).format('DD/MM/YYYY[ ]HH:mm:ss') 
                 }
             })
 
@@ -214,7 +217,7 @@ const NfseService = {
                     'Descrição': item.descricao,
                     'Endereco Prestador': item.end_prestador,
                     'Status': item.status,
-                    'Data emissão': moment(item.ref_dataEmissao).utc(true).format('DD/MM/YYYY[ ]HH:mm:ss') 
+                    'Data emissão': moment(item.ref_dataEmissao).subtract('hour', 3).format('DD/MM/YYYY[ ]HH:mm:ss')
                 }
             })
                         
