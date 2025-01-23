@@ -26,7 +26,8 @@ const NfseController = {
             cnpj_prestador,
             cnpj_tomador,
             tomador,
-            prestador
+            prestador,
+            chave_acesso
         } = req.query;
 
         try {
