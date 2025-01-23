@@ -47,7 +47,8 @@ const NfseController = {
                 cnpj_prestador ? cnpj_prestador : undefined,
                 cnpj_tomador ? cnpj_tomador : undefined,
                 tomador ? tomador : undefined,
-                prestador ? prestador : undefined
+                prestador ? prestador : undefined,
+                chave_acesso ? chave_acesso : undefined
 			);
 			return res.json(nfses);
 		} catch (err) {
@@ -105,14 +106,13 @@ const NfseController = {
                     cnpj_tomador ? cnpj_tomador : undefined,
                     tomador ? tomador : undefined,
                     prestador ? prestador : undefined,
-                    chave_acesso ? chave_acesso : String(chave_acesso)
+                    chave_acesso ? chave_acesso : undefined
                 );
                 const {nameExcel: nameExcelReturn, dirPath: dirPathReturn} = await NfseService.exportExcel(nfses, initialDate, finalDate);
                 nameExcel = nameExcelReturn
                 dirPath = dirPathReturn
             }
 
-            console.log()
             const stream = createReadStream(`${dirPath}/${nameExcel}.xlsx`)
 
             res.setHeader(
