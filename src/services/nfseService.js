@@ -157,7 +157,7 @@ const NfseService = {
                     'Descrição': item.descricao,
                     'Endereco Prestador': item.end_prestador,
                     'Status': item.status,
-                    'Data emissão': moment(item.ref_dataEmissao).utc(-3).format('DD/MM/YYYY[ ]HH:mm:ss') 
+                    'Data emissão': moment(item.ref_dataEmissao).utc(-6).format('DD/MM/YYYY[ ]HH:mm:ss') 
                 }
             })
 
@@ -210,7 +210,7 @@ const NfseService = {
                     'Descrição': item.descricao,
                     'Endereco Prestador': item.end_prestador,
                     'Status': item.status,
-                    'Data emissão': moment(item.ref_dataEmissao).utc(-3).format('DD/MM/YYYY[ ]HH:mm:ss') 
+                    'Data emissão': moment(item.ref_dataEmissao).utc(-6).format('DD/MM/YYYY[ ]HH:mm:ss') 
                 }
             })
                         
