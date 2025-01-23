@@ -135,7 +135,11 @@ const NfseService = {
         try{
             const dirPath = './src/downloads/'
             const workbook = xlsx.utils.book_new()
-            const nfsesFormmated = nfses.map(item => {
+            const nfsesFormmated = nfses.map((item, i) => {
+                if(i == 0){
+                    console.log(item.ref_dataEmissao);
+                    console.log('chave> ', item.chave_acesso)
+                }
                 return {
                     'Município': item.municipio,
                     'RPS': item.num_rps,
@@ -157,7 +161,7 @@ const NfseService = {
                     'Descrição': item.descricao,
                     'Endereco Prestador': item.end_prestador,
                     'Status': item.status,
-                    'Data emissão': moment(item.ref_dataEmissao).utc(-6).format('DD/MM/YYYY[ ]HH:mm:ss') 
+                    'Data emissão': moment(item.ref_dataEmissao).utc(true).format('DD/MM/YYYY[ ]HH:mm:ss') 
                 }
             })
 
@@ -210,7 +214,7 @@ const NfseService = {
                     'Descrição': item.descricao,
                     'Endereco Prestador': item.end_prestador,
                     'Status': item.status,
-                    'Data emissão': moment(item.ref_dataEmissao).utc(-6).format('DD/MM/YYYY[ ]HH:mm:ss') 
+                    'Data emissão': moment(item.ref_dataEmissao).utc(true).format('DD/MM/YYYY[ ]HH:mm:ss') 
                 }
             })
                         
