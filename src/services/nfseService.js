@@ -36,6 +36,7 @@ const NfseService = {
         cnpj_tomador,
         tomador, 
         prestador,
+        chave_acesso
     ){
         try{
 
@@ -46,6 +47,12 @@ const NfseService = {
                 query.where('num_rps', '=', search)
                 countQuery.where('num_rps', '=', search)
             }
+
+            if(chave_acesso){
+                query.where('chave_acesso', '=', chave_acesso)
+                countQuery.where('chave_acesso', '=', chave_acesso)
+            }
+
 
             if(status){
                 query.where('status', '=', status)
@@ -150,7 +157,7 @@ const NfseService = {
                     'Descrição': item.descricao,
                     'Endereco Prestador': item.end_prestador,
                     'Status': item.status,
-                    'Data emissão': item.ref_dataEmissao
+                    'Data emissão': moment(item.ref_dataEmissao).utc(-3).format('DD/MM/YYYY[ ]HH:mm:ss') 
                 }
             })
 

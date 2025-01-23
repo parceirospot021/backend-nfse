@@ -158,7 +158,7 @@ readStream.on('end', async function() {
         j > i 
         && item.chave_acesso == itemArr.chave_acesso 
     )
-  }).map(nfse => ({...nfse, ref_dataEmissao: moment(nfse?.ref_dataEmissao).utc(-3).toISOString()}))
+  }).map(nfse => ({...nfse, ref_dataEmissao: moment(nfse?.ref_dataEmissao).utc().toISOString()}))
 
 
   console.log('sem duplicados', arr.length);

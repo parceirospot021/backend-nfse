@@ -102,7 +102,7 @@ const decodeNfses = (arr) => {
                 chave_acesso,
                 descricao,
                 end_prestador,
-                ref_dataEmissao: moment(nfse?.dataEmissao).utc(-3).toISOString(),
+                ref_dataEmissao: moment(nfse?.dataEmissao).utc().toISOString(),
                 status: nfse?.status,
                 ref_numeroRPS: nfse?.numeroRPS,
                 ref_numeroNfse: nfse?.numeroDocumento
@@ -127,7 +127,7 @@ const getNfseAutomatic = async() => {
             ).then(async({data}) => {
                 console.log('cron ->', {page, items: data?.length});
                 if(!data.length){
-                    console.log('ACABOU CRON', moment().utc(-3).toISOString());
+                    console.log('ACABOU CRON', moment().utc().toISOString());
                 }else{
                     const objFake={
                         municipio: 'Rio de Janeiro/RJ',

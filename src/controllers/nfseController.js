@@ -72,7 +72,8 @@ const NfseController = {
             cnpj_tomador,
             tomador,
             prestador,
-            chave_acesso
+            chave_acesso,
+            unique
         } = req.query;
         
         const folderName = './src/downloads';
@@ -81,8 +82,8 @@ const NfseController = {
             if (!existsSync(folderName)) {
                 mkdirSync(folderName);
             }
-            if(chave_acesso){
-                const {nameExcel: nameExcelReturn, dirPath: dirPathReturn} = await NfseService.exportExcelPerAccessKey(chave_acesso);
+            if(unique){
+                const {nameExcel: nameExcelReturn, dirPath: dirPathReturn} = await NfseService.exportExcelPerAccessKey(unique);
                 nameExcel = nameExcelReturn
                 dirPath = dirPathReturn
             }else{
@@ -103,9 +104,9 @@ const NfseController = {
                     cnpj_prestador ? cnpj_prestador : undefined,
                     cnpj_tomador ? cnpj_tomador : undefined,
                     tomador ? tomador : undefined,
-                    prestador ? prestador : undefined
+                    prestador ? prestador : undefined,
+                    chave_acesso ? chave_acesso : String(chave_acesso)
                 );
-                console.log('LENGTH', nfses.length);
                 const {nameExcel: nameExcelReturn, dirPath: dirPathReturn} = await NfseService.exportExcel(nfses, initialDate, finalDate);
                 nameExcel = nameExcelReturn
                 dirPath = dirPathReturn
