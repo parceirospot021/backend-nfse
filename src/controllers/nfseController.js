@@ -1,5 +1,5 @@
 import NfseService from "../services/nfseService.js";
-import {createReadStream, readdir, existsSync, unlinkSync} from 'fs'
+import {createReadStream, readdir, existsSync, unlinkSync, mkdirSync} from 'fs'
 const NfseController = {
     async create(req, res, next){
         const data = req.body;
@@ -74,10 +74,13 @@ const NfseController = {
             prestador,
             chave_acesso
         } = req.query;
-
+        
+        const folderName = './src/downloads';
         try {
             let nameExcel, dirPath;
-
+            if (!existsSync(folderName)) {
+                mkdirSync(folderName);
+            }
             if(chave_acesso){
                 const {nameExcel: nameExcelReturn, dirPath: dirPathReturn} = await NfseService.exportExcelPerAccessKey(chave_acesso);
                 nameExcel = nameExcelReturn
