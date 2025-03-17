@@ -34,7 +34,7 @@ const getToken = async() => {
         let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'https://spacenddidentityhml.e-datacenter.nddigital.com.br/connect/token?grant_type=client_credentials&client_id=9cc0ea318a3a4cc397236b3b8f2716bd&scope=integracao-api&client_secret=nd6lV6YRAN4ltzhcOf6NpzNJyUnp1OaGLun9F0MTkdY=',
+            url: 'https://spacenddidentityprod.e-datacenter.nddigital.com.br/connect/token?grant_type=client_credentials&client_id=78c6d02e94f2492fb5b58d32de21f5e4&scope=integracao-api&client_secret=Ual1rhyWAC56REJE7vvuUjLdlzsgR0CUYBYU/RwneNM=',
             headers: { 
             ...data.getHeaders()
             },
@@ -123,7 +123,7 @@ const getNfseAutomatic = async() => {
         const makeRequest = async (page) => {
             if(page >= max_request) return;
             axios
-            .get(`https://spaceapiv2hml.e-datacenter.nddigital.com.br/integracaov2-nfse/api/NFSeRecepcao/ConsultarRecepcaoNFSe?CNPJ=29985115000164&DataEmissaoInicial=${initDate}&DataEmissaoFinal=${endDate}&Pagina=${page}`,
+            .get(`https://spaceportalprod.e-datacenter.nddigital.com.br/integracao-nfse/api/NFSeRecepcao/ConsultarRecepcaoNFSe?CNPJ=29985115000164&DataEmissaoInicial=${initDate}&DataEmissaoFinal=${endDate}&Pagina=${page}`,
             ).then(async({data}) => {
                 console.log('cron ->', {page, items: data?.length});
                 if(!data.length){
