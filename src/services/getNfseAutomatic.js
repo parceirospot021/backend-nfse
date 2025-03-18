@@ -123,7 +123,7 @@ const getNfseAutomatic = async() => {
         const makeRequest = async (page) => {
             if(page >= max_request) return;
             axios
-            .get(`https://spaceportalprod.e-datacenter.nddigital.com.br/integracao-nfse/api/NFSeRecepcao/ConsultarRecepcaoNFSe?CNPJ=29985115000164&DataEmissaoInicial=${initDate}&DataEmissaoFinal=${endDate}&Pagina=${page}`,
+            .get(`https://spaceportalprod.e-datacenter.nddigital.com.br/integracao-nfse/api/NFSeRecepcao/buscarPorCNPJInscricaoMunicipal?CNPJ=29985115000164&DataEmissaoInicial=${initDate}&DataEmissaoFinal=${endDate}&Pagina=${page}`,
             ).then(async({data}) => {
                 console.log('cron ->', {page, items: data?.length});
                 if(!data.length){

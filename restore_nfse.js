@@ -35,8 +35,8 @@ let config = {
     //     DataEmissaoFinal: '2025-01-20T23:59:59.999Z'
     // },
     {
-        DataEmissaoInicial: '2025-01-20T23:59:59.999Z',
-        DataEmissaoFinal: '2025-01-22T23:59:59.999Z'
+        DataEmissaoInicial: '2025-03-01T23:59:59.999Z',
+        DataEmissaoFinal: '2025-03-02T23:59:59.999Z'
     },
     // {
     //     DataEmissaoInicial: '2024-12-01T23:59:59.000Z',
@@ -55,11 +55,11 @@ let config = {
       const data = datas[idx];
       if(page >= max_request) return;
       // let resultOfYesterday = read('./src/database/arr.txt');
-      console.log({token});
+    //   console.log({token});
       axios
-      .get(`https://spaceportalprod.e-datacenter.nddigital.com.br/integracao-nfse/api/NFSeRecepcao/ConsultarRecepcaoNFSe?CNPJ=29985115000164&DataEmissaoInicial=${data?.DataEmissaoInicial}&DataEmissaoFinal=${data?.DataEmissaoFinal}&Pagina=${page}`,
+      .get(`https://spaceportalprod.e-datacenter.nddigital.com.br/integracao-nfse/api/NFSeRecepcao/buscarPorCNPJInscricaoMunicipal?CNPJ=29985115000164&DataEmissaoInicial=${data?.DataEmissaoInicial}&DataEmissaoFinal=${data?.DataEmissaoFinal}&Pagina=${page}`,
       ).then(({data}) => {
-          // console.log(data?.length);
+        //   console.log(data?.length);
           console.log({page});
           if(!data.length){
               console.log('ACABOU REQUISIÇÃO', 'INDEX: ', idx);
